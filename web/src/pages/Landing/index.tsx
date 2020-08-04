@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import './styles.css';
 import logoImg from '../../assets/images/logo.svg';
 import landingImg from '../../assets/images/landing.svg';
@@ -30,8 +29,8 @@ function Landing() {
                     </a>
 
                     <a href="" className="give-classes">
-                        <img src={giveClassesIcon} alt="Estudar"/>
-                        Estudar
+                        <img src={giveClassesIcon} alt="Dar aulas"/>
+                        Dar aulas
                     </a>    
                 </div>
                 <span className="total-connections">
