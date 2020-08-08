@@ -2,32 +2,54 @@ import React from 'react';
 
 import './styles.css';
 import whatsappIcon from '../../assets/images/icons/whatsapp.svg';
+import api from '../../services/api';
 
 
-function TeacherItem() {
+export interface Teacher {
+    id: number, 
+    avatar: string,
+    bio: string,
+    cost: number,
+    name: string,
+    subject: string,
+    whatsapp: string
+};
+
+interface TeacherItemProps {
+    teacher: Teacher
+}
+
+const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
+    
+    function createNewConnection() {
+        api.post('connections', {
+            user_id: teacher.id
+        })
+    }
+
     return (
         <article className="teacher-item">
             <header>
-                <img src="https://avatars2.githubusercontent.com/u/48365582?s=460&u=4699412acb6474b6a3192764e094c4937307701a&v=4" alt="Felipe Jonas" />
+                <img src={teacher.avatar} alt={teacher.name} />
                 <div>
-                    <strong>Felipe Jonas</strong>
-                    <span>Física</span>
+                    <strong>{teacher.name}</strong>
+                    <span>{teacher.subject}</span>
                 </div>
             </header>
-            <p>
-                Entusiasta das melhores fórmulas de física avançada
-                <br /><br />
-                Quisque scelerisque egestas euismod. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris blandit feugiat urna at consectetur. Donec ut luctus dolor, a accumsan dolor. Etiam mollis dignissim magna. Cras erat dui, tincidunt nec enim ac, consequat rutrum lectus. Suspendisse et turpis risus. Integer tincidunt magna in est faucibus mollis. Etiam ultricies semper euismod.
-            </p>
+            <p>{teacher.bio}</p>
             <footer>
                 <p>
                     Preço/Hora
-                    <strong>R$ 80,00</strong>
+                    <strong>R$ {teacher.cost} </strong>
                 </p>
-                <button type="button">
+                <a 
+                target="_blank" 
+                href={`http://wa.me/${teacher.whatsapp}?text=Ol%C3%A1%21%20Vi%20seu%20contato%20atrav%C3%A9s%20da%20plataforma%20Proffy%20e%20quero%20marcar%20uma%20aula.%20%20`}
+                onClick={createNewConnection}
+                >
                     <img src={whatsappIcon} alt="Whatsapp" />
                     Entrar em contato
-                </button>
+                </a>
             </footer>
         </article>
     )
