@@ -69,6 +69,7 @@
     /* space-evely - Padroniza o espaçamento em todos os lados */
     justify-content: space-evenly;
     transition: 0.2s;
+    color: var(--color-button-text);
 }
 
 .teacher-item footer button:hover {
